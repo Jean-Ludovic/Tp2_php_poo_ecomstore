@@ -1,0 +1,9 @@
+ utilisateur par défaut :
+JeanLudo
+password123 
+
+le_user
+user123
+
+Un administrateur admin 
+adminpassword 
