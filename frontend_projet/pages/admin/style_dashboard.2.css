@@ -1,0 +1,104 @@
+.d-flex {
+    display: flex;
+    min-height: 100vh;
+}
+
+.app-sidebar {
+    width: 250px;
+    background-color: #343a40;
+    min-height: 100vh;
+    padding-top: 20px;
+    flex-shrink: 0;
+}
+
+.app-sidebar .app-menu__item {
+    color: #fff;
+    padding: 15px;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.app-sidebar .app-menu__item:hover {
+    background-color: #495057;
+}
+
+.app-sidebar input[type="radio"] {
+    display: none;
+}
+
+.app-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.widget-small {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.widget-small .icon {
+    margin-right: 15px;
+}
+
+.widget-small .info {
+    flex-grow: 1;
+}
+
+.widget-small .info h4 {
+    margin-bottom: 10px;
+}
+
+.widget-small .btn {
+    margin-right: 5px;
+}
+
+.table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+footer {
+    width: 100%;
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}
+/* CSS pour afficher les sections basées sur le bouton radio sélectionné */
+.sections > .section {
+    display: none; /* Par défaut, cacher toutes les sections */
+}
+
+#dashboard-radio:checked ~ .app-content .sections #dashboard,
+#gestion-utilisateurs-radio:checked ~ .app-content .sections #gestion-utilisateurs,
+#gestion-produits-radio:checked ~ .app-content .sections #gestion-produits,
+#gestion-commandes-radio:checked ~ .app-content .sections #gestion-commandes,
+#gestion-paiements-radio:checked ~ .app-content .sections #gestion-paiements {
+    display: block; /* Afficher la section correspondant au bouton radio sélectionné */
+}

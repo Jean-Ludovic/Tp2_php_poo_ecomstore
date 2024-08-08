@@ -1,5 +1,4 @@
 <?php
-// functions/connection/process_logout.php
 session_start();
 session_unset();
 session_destroy();

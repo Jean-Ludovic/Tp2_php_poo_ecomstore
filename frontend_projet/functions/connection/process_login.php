@@ -1,31 +1,30 @@
 <?php
 session_start();
-include_once '../../Classes/Login.php';
+include_once '../../Classes/User.php';
 include_once '../../DATABASE/Database.php';
 
+// Connexion à la base de données
 $database = new Database();
 $conn = $database->getConnection();
-$login = new Login($conn);
 
-$response = array();
+// Créer une instance de la classe User
+$user = new User($conn);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+// Récupérer les informations du formulaire
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-    // Définir le chemin relatif pour la page utilisateur
-    $user_accueil_path = '/e_comerce_2/frontend/frontend_projet/';
+// Vérifier si l'utilisateur existe
+if ($user->authenticate($username, $password)) {
+    $_SESSION['username'] = $username;
+    $_SESSION['is_admin'] = false;  // Assurez-vous que ce n'est pas un admin
 
-    // Vérification des informations de connexion pour les utilisateurs
-    if ($login->authenticate($username, $password)) {
-        $_SESSION['username'] = $username; // Stocke l'utilisateur dans la session
-        $response['status'] = 'success';
-        $response['redirect'] = $user_accueil_path;
-    } else {
-        $response['status'] = 'error';
-        $response['message'] = "Nom d'utilisateur ou mot de passe incorrect.";
-    }
-
-    echo json_encode($response);
-    exit;
+    // Redirection vers l'index après connexion réussie
+    header("Location: ../../index.php");
+    exit();
+} else {
+    // Si les informations sont incorrectes, rediriger vers la page de connexion
+    $_SESSION['login_error'] = "Nom d'utilisateur ou mot de passe incorrect.";
+    header("Location: ../../login-form-14/login-form-14/index.html");
+    exit();
 }

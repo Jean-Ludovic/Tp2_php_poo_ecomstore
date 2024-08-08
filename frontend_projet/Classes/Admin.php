@@ -1,4 +1,6 @@
 <?php
+// Classes/Admin.php
+
 include_once 'User.php';
 
 class Admin extends User
@@ -10,28 +12,24 @@ class Admin extends User
         parent::__construct($db);
     }
 
-    // Méthode pour créer un nouvel administrateur
-    public function create()
+    public function authenticate($username, $password)
     {
-        $query = "INSERT INTO " . $this->table_name . " (username, email, password) VALUES (:username, :email, :password)";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE username = :username";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
 
-        $this->username = htmlspecialchars(strip_tags($this->username));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
-
-        $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':password', $this->password);
-
-        if ($stmt->execute()) {
-            return true;
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($password, $row['password'])) {
+                $this->id = $row['id'];
+                $this->username = $row['username'];
+                return true;
+            }
         }
-
         return false;
     }
 
-    // Méthode spécifique aux administrateurs
     public function deleteUser($user_id)
     {
         $query = "DELETE FROM utilisateurs WHERE id = :id";
@@ -39,12 +37,6 @@ class Admin extends User
 
         $stmt->bindParam(':id', $user_id);
 
-        if ($stmt->execute()) {
-            return true;
-        }
-
-        return false;
+        return $stmt->execute();
     }
-
-    // Ajoutez d'autres méthodes spécifiques aux administrateurs ici
 }
