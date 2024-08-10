@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $items = $panier->obtenirPanier();
 $totalPrix = 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -93,14 +92,10 @@ $totalPrix = 0;
                             <form method="POST" action="process_payment.php">
                                 <button type="submit" class="btn btn-success">Procéder au paiement</button>
                             </form>
-                            <form method="POST" action="process_payment.php">
-                                <input type="hidden" name="method" value="paypal">
-                                <button type="submit" class="btn btn-info">PayPal</button>
-                            </form>
-                            <form method="POST" action="process_payment.php">
-                                <input type="hidden" name="method" value="credit_card">
-                                <button type="submit" class="btn btn-warning">Carte de crédit</button>
-                            </form>
+
+                            <!-- PayPal Button Container -->
+                            <div id="paypal-button-container"></div>
+
                         </div>
                     </div>
                 <?php else : ?>
@@ -110,6 +105,32 @@ $totalPrix = 0;
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- PayPal JS SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AWA59fffyY5gMozpT3Nz-w1cTJEZPteyeRy1Gw6iWD5lGHN0cN1GSXJc-Y6wYmBt_qSy2JCFCDXCyC0R&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo"></script>
+
+    <!-- PayPal Button Render -->
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '<?php echo $totalPrix; ?>' // The total price
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    // Redirect or process order further
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+
 </body>
 
 </html>
