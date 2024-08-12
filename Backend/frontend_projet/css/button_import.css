@@ -1,0 +1,7 @@
+.btn-custom {
+    background-color: black;    /* Fond noir */
+    border: 2px solid red;      /* Bordures rouges */
+    color: white;
+   
+    padding-right: 20px;     
+}
