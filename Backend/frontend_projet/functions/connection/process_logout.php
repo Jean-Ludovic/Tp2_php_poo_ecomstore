@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: /e_comerce_2/frontend/frontend_projet/");
+header("Location: ../.././../../landing-page/index.html");
 exit;
