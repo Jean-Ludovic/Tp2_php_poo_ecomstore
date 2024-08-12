@@ -75,7 +75,7 @@ $totalArticles = $panier->obtenirNombreTotal();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./documentation/rapport.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../startbootstrap-clean-blog-gh-pages/startbootstrap-clean-blog-gh-pages/index.html">About</a></li>
                     <?php if ($is_admin) : ?>
                         <li class="nav-item"><a class="nav-link" href="./pages/admin/admin_dashboard.php">Dashboard</a></li>
                         <li class="nav-item"><a class="nav-link" href="./pages/admin/gestion_utilisateurs.php">Manage-users</a></li>

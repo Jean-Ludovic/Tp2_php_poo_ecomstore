@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Clean Blog - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Ganster Online Shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="./index.html">back</a></li>
+                      
+                        
+                    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/PHP.webp')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>DIAGRAMME DE CLASSE</h1>
+                            <span class="subheading"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+<!-- Photo Section -->
+<section class="photo-section">
+    <div class="container px-4 px-lg-5">
+        <img src="./assets/img/diagram.png" alt="Description de l'image" class="img-fluid">
+    </div>
+</section>
+
+<!-- Link Section -->
+<section class="link-section">
+    <div class="container px-4 px-lg-5">
+        <a href="https://www.example.com" target="_blank"></a>
+    </div>
+</section>
+
+<!-- Paragraph Section -->
+<section class="paragraph-section">
+    <div class="container px-4 px-lg-5">
+        <p>
+            <strong>Analyse du Diagramme de Classes</strong><br><br>
+            
+            Ce diagramme de classes illustre la structure d'une base de données destinée à une <strong>application de commerce en ligne</strong>. Il se compose de plusieurs entités principales, chacune représentée par une table dans la base de données. Voici une analyse détaillée des différentes tables et de leurs relations :<br><br>
+            
+            <strong>1. Table <em>utilisateurs</em></strong><br>
+            Cette table contient les informations des utilisateurs inscrits sur la plateforme. Elle comprend les champs suivants :<br>
+            - <strong>id</strong> : L'identifiant unique de l'utilisateur.<br>
+            - <strong>username</strong> : Le nom d'utilisateur.<br>
+            - <strong>email</strong> : L'adresse email de l'utilisateur.<br>
+            - <strong>password</strong> : Le mot de passe de l'utilisateur.<br>
+            Chaque utilisateur peut avoir plusieurs <strong>paiements</strong> et <strong>articles dans le panier</strong>, comme illustré par les relations avec les tables correspondantes.<br><br>
+            
+            <strong>2. Table <em>admins</em></strong><br>
+            Cette table est similaire à la table <em>utilisateurs</em>, mais elle est destinée aux administrateurs de la plateforme. Les champs incluent :<br>
+            - <strong>id</strong>, <strong>username</strong>, <strong>email</strong>, <strong>password</strong> : Comme pour la table <em>utilisateurs</em>.<br>
+            - <strong>created_at</strong> : La date et l'heure de la création de l'administrateur.<br><br>
+            
+            <strong>3. Table <em>produits</em></strong><br>
+            La table <em>produits</em> stocke les informations sur les produits disponibles à la vente. Les champs sont :<br>
+            - <strong>id</strong> : L'identifiant unique du produit.<br>
+            - <strong>nom</strong> : Le nom du produit.<br>
+            - <strong>image</strong> : Un lien vers l'image du produit.<br>
+            - <strong>prix</strong> : Le prix du produit.<br>
+            - <strong>note</strong> : Une note attribuée au produit (éventuellement par les utilisateurs).<br><br>
+            
+            <strong>4. Table <em>panier</em></strong><br>
+            Cette table est essentielle pour relier les <strong>utilisateurs</strong> aux <strong>produits</strong> qu'ils souhaitent acheter. Les champs incluent :<br>
+            - <strong>id</strong> : L'identifiant unique de l'article dans le panier.<br>
+            - <strong>utilisateur_id</strong> : La référence à l'utilisateur qui a ajouté cet article au panier.<br>
+            - <strong>produit_id</strong> : La référence au produit ajouté au panier.<br>
+            - <strong>quantite</strong> : La quantité de ce produit dans le panier.<br>
+            - <strong>paye</strong> : Un indicateur de l'état de paiement de l'article.<br><br>
+            
+            <strong>5. Table <em>paiements</em></strong><br>
+            Cette table enregistre les transactions financières effectuées par les utilisateurs. Les champs sont :<br>
+            - <strong>id</strong> : L'identifiant unique du paiement.<br>
+            - <strong>utilisateur_id</strong> : La référence à l'utilisateur qui a effectué le paiement.<br>
+            - <strong>montant</strong> : Le montant payé.<br>
+            - <strong>date_paiement</strong> : La date et l'heure du paiement.<br>
+            - <strong>statut</strong> : Le statut du paiement (par exemple, en attente, confirmé).<br><br>
+            
+            <strong>Relations entre les tables</strong><br>
+            Les relations dans ce diagramme sont indiquées par des lignes connectant les tables. Par exemple :<br>
+            - La table <em>paiements</em> est liée à la table <em>utilisateurs</em> par le champ <strong>utilisateur_id</strong>, indiquant quel utilisateur a effectué un paiement.<br>
+            - De même, la table <em>panier</em> relie les <strong>utilisateurs</strong> et les <strong>produits</strong> à travers les champs <strong>utilisateur_id</strong> et <strong>produit_id</strong>, représentant les articles qu'un utilisateur a ajouté à son panier.<br><br>
+            
+            Ce diagramme de classes fournit une vue d'ensemble claire de la structure de la base de données, illustrant comment les informations sur les utilisateurs, les produits, les transactions, et les articles dans le panier sont interconnectées pour soutenir les fonctionnalités de l'application de commerce en ligne.
+            </p>
+            
+            
+    </div>
+</section>
+
+
