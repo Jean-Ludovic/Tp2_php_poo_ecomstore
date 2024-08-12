@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Obtenir les produits dans le panier
 $items = $panier->obtenirPanier();
 $totalPrix = 0;
+$image_directory = '../../assets/images/';
+$supported_extensions = ['webp', 'png', 'jpg', 'jpeg'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -72,12 +75,22 @@ $totalPrix = 0;
                     <?php foreach ($items as $produitId => $details) : ?>
                         <?php
                         $totalPrix += $details['prix'] * $details['quantite'];
+
+                        // Déterminer l'image du produit
+                        $image_src = '../../assets/images/default.webp'; // Fallback image
+                        foreach ($supported_extensions as $extension) {
+                            $image_path = $image_directory . strtolower($details['nom']) . '.' . $extension;
+                            if (file_exists($image_path)) {
+                                $image_src = $image_path;
+                                break;
+                            }
+                        }
                         ?>
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <img src="../../assets/images/<?php echo htmlspecialchars($details['nom']); ?>.webp" class="img-fluid rounded-3" alt="<?php echo htmlspecialchars($details['nom']); ?>">
+                                        <img src="<?php echo htmlspecialchars($image_src); ?>" class="img-fluid rounded-3" alt="<?php echo htmlspecialchars($details['nom']); ?>">
                                     </div>
                                     <div class="col-md-3">
                                         <h5><?php echo htmlspecialchars($details['nom']); ?></h5>

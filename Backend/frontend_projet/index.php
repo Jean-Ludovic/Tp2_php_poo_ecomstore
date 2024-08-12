@@ -40,6 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['produit_id'])) {
 
 // Obtenir le nombre total d'articles dans le panier
 $totalArticles = $panier->obtenirNombreTotal();
+
+// Filtrer les produits en fonction de la recherche
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+$filteredProducts = array_filter($products, function ($product) use ($searchTerm) {
+    return stripos($product['nom'], $searchTerm) !== false;
+});
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +89,7 @@ $totalArticles = $panier->obtenirNombreTotal();
                         <li class="nav-item"><a class="nav-link" href="./pages/admin/gestion_paiements.php">Manage-Payments</a></li>
                     <?php endif; ?>
                 </ul>
+
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="button">
                         <i class="bi-cart-fill me-1"><a href="./pages/cart/panier.php">Cart</a></i>
@@ -113,11 +120,16 @@ $totalArticles = $panier->obtenirNombreTotal();
                 <h2 class="display-6 fw-bolder">Bienvenue, <?php echo htmlspecialchars($username); ?>!</h2>
             </div>
         </div>
+        <form class="d-flex" method="GET" action="">
+            <input class="form-control me-2" type="search" name="search" placeholder="Rechercher un produit" aria-label="Search" value="<?php echo htmlspecialchars($searchTerm); ?>">
+            <button class="btn btn-outline-dark" type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </header>
     <section class="py-5">
+
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php foreach ($products as $product) : ?>
+                <?php foreach ($filteredProducts as $product) : ?>
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Image du produit -->
